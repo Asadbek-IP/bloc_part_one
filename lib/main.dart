@@ -1,7 +1,7 @@
-import 'package:bloc_part_one/pages/homepage/home_page.dart';
+import 'package:bloc_part_one/bloc/postList_cubit.dart';
+import 'package:bloc_part_one/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 main() {
   runApp(MyApp());
@@ -17,8 +17,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage(),
+    return BlocProvider(
+      create: (context) => PostListCubit(),
+      child: MaterialApp(
+        home: HomePage(),
+      ),
     );
   }
 }
