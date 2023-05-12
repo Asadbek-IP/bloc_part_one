@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PostListCubit(),
+      create: (context) => ContactListCubit(),
       child: MaterialApp(
         home: HomePage(),
       ),

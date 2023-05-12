@@ -1,25 +1,25 @@
-import 'package:bloc_part_one/model/post_model.dart';
+import 'package:bloc_part_one/model/contact_model.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class PostListState extends Equatable {
+abstract class ContactListState extends Equatable {
   @override
   // TODO: implement props
-  List<Post> get props => [];
+  List<Contact> get props => [];
 }
 
-class PostListInit extends PostListState {}
+class ContactListInit extends ContactListState {}
 
-class LoadingState extends PostListState {}
+class LoadingState extends ContactListState {}
 
-class LoadedState extends PostListState {
-  List<Post> posts;
-  LoadedState({required this.posts});
+class LoadedState extends ContactListState {
+  List<Contact> contacts;
+  LoadedState({required this.contacts});
   @override
   // TODO: implement props
-  List<Post> get props => posts;
+  List<Contact> get props => contacts;
 }
 
-class ErrorState extends PostListState {
+class ErrorState extends ContactListState {
   final error;
   ErrorState({required this.error});
 }

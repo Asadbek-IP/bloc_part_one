@@ -1,20 +1,35 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import '../model/post_model.dart';
+import '../model/contact_model.dart';
 
 class ApiService {
   static final dio = Dio();
 
-  static String baseUrl = "https://jsonplaceholder.typicode.com";
+  static String baseUrl =
+      "https://645626895f9a4f23613bea38.mockapi.io/api/nem/users";
 
-  static Future<List<Post>?> getListPost() async {
+  static Future<List<Contact>?> getListPost() async {
     try {
-      var response = await dio.get("$baseUrl/posts");
+      var response = await dio.get("$baseUrl");
 
       if (response.statusCode == 200) {
-        return postFromJson(response.data);
+        return contactFromJson(response.data);
       }
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw "${e.error} Internetga Ulanmagan";
+      } else {
+        throw "${e.message} Serverda Xatolik";
+      }
+    }
+  }
+
+  static Future<bool> deleteContact(String id) async {
+    try {
+      var response = await dio.delete(baseUrl + "/" + id);
+
+      return response.statusCode == 200;
     } on DioError catch (e) {
       if (e.error is SocketException) {
         throw "${e.error} Internetga Ulanmagan";
