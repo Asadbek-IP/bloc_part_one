@@ -29,6 +29,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: Text("BLoC One Part"),
       ),
@@ -74,13 +78,10 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           SlidableAction(
                             flex: 2,
-                            onPressed: (c) {
-                              //Navigator
-                              EditPage(
-                                name: contacts[index].name,
-                                phoneNumber: contacts[index].phoneNumber,
-                                id: contacts[index].id,
-                              );
+                            onPressed: (context) {
+                              context
+                                  .read<ContactListCubit>()
+                                  .pushEditPage(context, contacts[index]);
                             },
                             backgroundColor: Color(0xFF7BC043),
                             foregroundColor: Colors.white,

@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -18,9 +19,9 @@ class ApiService {
       }
     } on DioError catch (e) {
       if (e.error is SocketException) {
-        throw "${e.error} Internetga Ulanmagan";
+        throw "Internetga Ulanmagan";
       } else {
-        throw "${e.message} Serverda Xatolik";
+        throw "Serverda Xatolik";
       }
     }
   }
@@ -35,6 +36,20 @@ class ApiService {
         throw "${e.error} Internetga Ulanmagan";
       } else {
         throw "${e.message} Serverda Xatolik";
+      }
+    }
+  }
+
+  static Future<bool> updateContact(Contact contact) async {
+    try {
+      var response = await dio.put(baseUrl + "/" + contact.id,
+          data: jsonEncode(contact.toJson()));
+      return response.statusCode == 200;
+    } on DioError catch (e) {
+      if (e.error is SocketException) {
+        throw "Internetga ulanmagan, iltimos ulaning";
+      } else {
+        throw "Serverda xatolik, keyinroq urinib ko'ring";
       }
     }
   }
